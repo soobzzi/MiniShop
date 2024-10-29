@@ -21,12 +21,12 @@ public class Product {
 
     @Id
     @Column(name = "prod_no")
-    private int prodNo;
+    private Integer prodNo;
 
-    @Column(name = "manufacture_day")
-    private String manuDate;
+    @Column(name = "category_Id")
+    private Integer categoryId;
 
-    private int price;
+    private Integer price;
 
     @Column(name = "prod_detail")
     private String prodDetail;
@@ -37,7 +37,8 @@ public class Product {
     @Column(name = "reg_date")
     private LocalDate regDate;
 
-    @Column(name = "image_file")
-    private String image;
+    private String status;
+
+    private Integer stock;
 
 }

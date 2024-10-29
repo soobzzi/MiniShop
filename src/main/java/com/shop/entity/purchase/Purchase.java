@@ -19,41 +19,39 @@ import java.time.LocalDate;
 public class Purchase {
 
     @Id
-    @Column(name = "tran_no")
-    private Integer tranNo;
+    @Column(name = "purchase_id")
+    private String purchaseId;
 
     @Column(name = "prod_no")
     private Long prodNo;
 
-    @Column(name = "buyer_id")
-    private String buyerId;
+    @Column(name = "user_id")
+    private String userId;
 
-    @Column(name = "demailaddr")
-    private String demailaddr;
+    @Column(name = "delivery_address")
+    private String devyAddr;
 
-    @Column(name = "divy_date")
-    private String divyDate;
+    @Column(name = "delivery_date")
+    private String devyDate;
 
-    @Column(name = "divy_request")
-    private String divyRequest;
+    @Column(name = "delivery_request")
+    private String devyRequest;
 
-    @Column(name = "order_data")
-    private LocalDate orderDate;
+    @Column(name = "purchase_date")
+    private LocalDate purchaseDate;
 
     @Column(name = "payment_option")
     private String paymentOption;
 
-    @Column(name = "receiver_name")
-    private String receiverName;
+    private String quantity;
 
-    @Column(name = "receiver_Phone")
-    private String receiverPhone;
+    private String status;
 
-    @Column(name = "tran_status_code")
-    private String tranCode;
+    @Column(name = "total_price")
+    private String totalPrice;
 
     @ManyToOne
-    @JoinColumn(name = "buyer_id", referencedColumnName = "user_id", insertable = false, updatable = false)
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id", insertable = false, updatable = false)
     private User user;
 
 

@@ -1,4 +1,4 @@
-package com.shop.service.impl.user;
+package com.shop.impl.user;
 
 import com.shop.entity.user.User;
 import com.shop.repository.UserRepository;
