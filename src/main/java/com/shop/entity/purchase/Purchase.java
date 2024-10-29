@@ -43,12 +43,12 @@ public class Purchase {
     @Column(name = "payment_option")
     private String paymentOption;
 
-    private String quantity;
+    private Integer quantity;
 
     private String status;
 
     @Column(name = "total_price")
-    private String totalPrice;
+    private Integer totalPrice;
 
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "user_id", insertable = false, updatable = false)

@@ -10,5 +10,8 @@ public interface PurchaseService {
 
     public Optional<Purchase> getPurchase(Integer tranNo);
 
+    public void updatePurchase(Purchase purchase);
+
+    public void updateStatus(String purchaseId, String status);
 
 }
