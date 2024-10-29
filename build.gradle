@@ -1,79 +1,94 @@
 plugins {
+	// Java 프로젝트용 플러그인
 	id 'java'
+	// Spring Boot 플러그인 (버전 3.3.4)
 	id 'org.springframework.boot' version '3.3.4'
+	// Spring의 의존성 관리를 위한 플러그인
 	id 'io.spring.dependency-management' version '1.1.6'
 }
 
-group = 'com'
-version = '0.0.1-SNAPSHOT'
+group = 'com'  // 그룹 ID 설정
+version = '0.0.1-SNAPSHOT'  // 프로젝트 버전 설정
 
 java {
+	// 자바 언어 버전을 21로 설정
 	toolchain {
 		languageVersion = JavaLanguageVersion.of(21)
 	}
 }
 
 repositories {
+	// 의존성을 Maven Central 저장소에서 가져옴
 	mavenCentral()
 }
 
 dependencies {
-	//lombok
+	// Lombok 라이브러리 (코드 생성 자동화)
 	implementation 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
+	// Spring Boot 웹 애플리케이션을 위한 기본 라이브러리
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	// Spring Boot 테스트 라이브러리
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	// JUnit 플랫폼 실행기 (테스트)
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-	//jpa
+	// Spring Data JPA (데이터베이스 연동)
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	// MySQL connector for java
+	// MySQL 데이터베이스 연동을 위한 MySQL 커넥터
 	implementation 'mysql:mysql-connector-java:8.0.33'
-
 }
 
 tasks.named('test') {
+	// JUnit 플랫폼을 테스트 프레임워크로 사용
 	useJUnitPlatform()
 }
 
-def frontendDir = "$projectDir/src/main/my-app"
+def frontendDir = "$projectDir/src/main/my-app"  // 프론트엔드 디렉토리 경로 설정
 
 sourceSets {
 	main {
-		resources { srcDirs = ["$projectDir/src/main/resources"]
-		}
+		// 리소스 폴더 설정
+		resources { srcDirs = ["$projectDir/src/main/resources"] }
 	}
 }
 
+// 리액트 빌드 파일을 복사하는 작업을 의존하게 만듦
 processResources { dependsOn "copyReactBuildFiles" }
 
+// npm 패키지 설치 및 취약점 자동 수정을 위한 작업
 task installReact(type: Exec) {
-	workingDir "$frontendDir"
-	inputs.dir "$frontendDir"
-	group = BasePlugin.BUILD_GROUP
+	workingDir "$frontendDir"  // 작업 디렉토리 설정
+	inputs.dir "$frontendDir"  // 입력 디렉토리 설정
+	group = BasePlugin.BUILD_GROUP  // 작업 그룹 설정
 	if (System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows')) {
+		// Windows 환경에서 npm 명령어 실행
 		commandLine "npm.cmd", "audit", "fix"
-		commandLine 'npm.cmd', 'install' }
-	else {
-		commandLine "npm", "audit", "fix" commandLine 'npm', 'install'
+		commandLine 'npm.cmd', 'install'
+	} else {
+		// 다른 OS 환경에서 npm 명령어 실행
+		commandLine "npm", "audit", "fix"
+		commandLine 'npm', 'install'
 	}
 }
 
+// React 애플리케이션 빌드를 위한 작업
 task buildReact(type: Exec) {
-	dependsOn "installReact"
-	workingDir "$frontendDir"
-	inputs.dir "$frontendDir"
-	group = BasePlugin.BUILD_GROUP
+	dependsOn "installReact"  // npm 설치 작업에 의존
+	workingDir "$frontendDir"  // 작업 디렉토리 설정
+	inputs.dir "$frontendDir"  // 입력 디렉토리 설정
+	group = BasePlugin.BUILD_GROUP  // 작업 그룹 설정
 	if (System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows')) {
+		// Windows 환경에서 빌드 명령어 실행
 		commandLine "npm.cmd", "run-script", "build"
 	} else {
+		// 다른 OS 환경에서 빌드 명령어 실행
 		commandLine "npm", "run-script", "build"
 	}
 }
 
+// 빌드된 React 파일을 백엔드 리소스 폴더로 복사
 task copyReactBuildFiles(type: Copy) {
-	dependsOn "buildReact"
-	from "$frontendDir/build"
-	into "$projectDir/src/main/resources/static"
+	dependsOn "buildReact"  // React 빌드 작업에 의존
+	from "$frontendDir/build"  // React 빌드 폴더 경로
+	into "$projectDir/src/main/resources/static"  // 복사할 대상 경로
 }
-
-
