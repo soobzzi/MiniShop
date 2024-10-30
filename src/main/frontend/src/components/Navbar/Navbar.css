@@ -1,0 +1,35 @@
+/* navbar 기본 스타일 */
+.navbar {
+   width: 100%;
+   padding: 10px 20px;
+   background-color: #fff;
+   display: flex;
+   justify-content: center;
+   border-bottom: 1px solid #ddd;
+ }
+ 
+ .navbar-menu {
+   display: flex;
+   list-style-type: none;
+   gap: 15px;
+ }
+ 
+ .menu-item {
+   font-size: 14px;
+   color: #6d6d6d;
+   cursor: pointer;
+ }
+ 
+ .menu-item:hover {
+   color: #333;
+ }
+ 
+ .highlight {
+   font-weight: bold;
+   color: #d9534f; /* BEST 30 강조 */
+ }
+ 
+ .menu-separator {
+   color: #ccc;
+ }
+ 

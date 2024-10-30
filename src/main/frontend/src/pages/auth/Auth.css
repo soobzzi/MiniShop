@@ -1,0 +1,80 @@
+
+.auth-container, .profile-container {
+   width: 500px;
+   margin: 0 auto;
+   padding: 20px;
+   text-align: center;
+   border: 1px solid #ddd;
+   background-color: #f9f9f9;
+   border-radius: 5px;
+ }
+ 
+ h2 {
+   font-size: 24px;
+   margin-bottom: 20px;
+ }
+ 
+ .login-form, .register-form {
+   display: flex;
+   flex-direction: column;
+   gap: 10px;
+ }
+ 
+ input {
+   padding: 10px;
+   font-size: 16px;
+   border: 1px solid #ddd;
+   border-radius: 5px;
+ }
+ 
+ .login-button, .register-button, .kakao-login {
+   padding: 10px;
+   font-size: 16px;
+   background-color: #d4a484;
+   color: white;
+   border: none;
+   border-radius: 5px;
+   cursor: pointer;
+ }
+ 
+ .kakao-login {
+   background-color: #ffeb00;
+   color: black;
+   margin-top: 10px;
+ }
+ 
+ .options {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   margin-top: 20px;
+ }
+ 
+ .membership {
+   margin-top: 30px;
+   text-align: left;
+ }
+ 
+ .membership h3 {
+   font-size: 18px;
+   margin-bottom: 10px;
+ }
+ 
+ .membership-options {
+   display: flex;
+   gap: 10px;
+ }
+ 
+ .membership-options button {
+   flex: 1;
+   padding: 10px;
+   font-size: 14px;
+   border: 1px solid #ddd;
+   border-radius: 5px;
+   cursor: pointer;
+   background-color: #f5f5f5;
+ }
+ 
+ .membership-options button:hover {
+   background-color: #e5e5e5;
+ }
